@@ -1,0 +1,148 @@
+(torch_gpu) C:\SASTRA\BioNER_project>python pubmed_model_combined_70_15_15.py
+🔥 Using device: cuda
+GPU Name: NVIDIA GeForce RTX 2050
+
+📂 Loading datasets...
+train.json samples        : 3178
+train_vennila.json samples: 1960
+Total merged samples      : 5138
+
+🧹 Normalizing merged dataset...
+Clean samples: 5138
+
+📊 Split summary:
+  Train : 3598 samples  (~70%)
+  Val   : 769 samples  (~15%)
+  Test  : 771 samples  (~15%)
+
+🔤 Loading PubMedBERT tokenizer...
+C:\Users\kisho\anaconda3\envs\torch_gpu\lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+
+⚙ Tokenizing...
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 3598/3598 [00:03<00:00, 1154.00 examples/s]
+Map: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 769/769 [00:00<00:00, 1100.46 examples/s]
+Map: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 771/771 [00:00<00:00, 1133.84 examples/s]
+
+🧠 Loading PubMedBERT model...
+Some weights of the model checkpoint at microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract were not used when initializing BertForTokenClassification: ['cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertForTokenClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForTokenClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertForTokenClassification were not initialized from the model checkpoint at microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+📊 Loading evaluation metric...
+
+🚀 PubMedBERT Training Started...
+
+C:\Users\kisho\anaconda3\envs\torch_gpu\lib\site-packages\transformers\optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+  0%|                                                                                                                             | 0/3375 [00:00<?, ?it/s]You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+{'loss': 2.3483, 'learning_rate': 1.3609467455621303e-06, 'epoch': 0.22}
+{'loss': 1.4219, 'learning_rate': 2.840236686390533e-06, 'epoch': 0.44}
+{'loss': 0.6598, 'learning_rate': 4.319526627218935e-06, 'epoch': 0.67}
+{'loss': 0.4581, 'learning_rate': 5.7988165680473375e-06, 'epoch': 0.89}
+{'eval_loss': 0.3252648413181305, 'eval_precision': 0.606687898089172, 'eval_recall': 0.5425804614070066, 'eval_f1': 0.5728461885430762, 'eval_accuracy': 0.8983825209093254, 'eval_runtime': 8.7596, 'eval_samples_per_second': 87.789, 'eval_steps_per_second': 11.074, 'epoch': 1.0}
+{'loss': 0.3572, 'learning_rate': 7.278106508875741e-06, 'epoch': 1.11}
+{'loss': 0.3071, 'learning_rate': 8.757396449704143e-06, 'epoch': 1.33}
+{'loss': 0.2707, 'learning_rate': 9.97365821534409e-06, 'epoch': 1.56}
+{'loss': 0.2777, 'learning_rate': 9.80902206124465e-06, 'epoch': 1.78}
+{'loss': 0.258, 'learning_rate': 9.64438590714521e-06, 'epoch': 2.0}
+{'eval_loss': 0.25172749161720276, 'eval_precision': 0.711340206185567, 'eval_recall': 0.6681857020791797, 'eval_f1': 0.6890879718020269, 'eval_accuracy': 0.9169153678935927, 'eval_runtime': 9.7384, 'eval_samples_per_second': 78.966, 'eval_steps_per_second': 9.961, 'epoch': 2.0}
+{'loss': 0.2319, 'learning_rate': 9.479749753045769e-06, 'epoch': 2.22}
+{'loss': 0.2165, 'learning_rate': 9.315113598946328e-06, 'epoch': 2.44}
+{'loss': 0.2248, 'learning_rate': 9.15047744484689e-06, 'epoch': 2.67}
+{'loss': 0.2498, 'learning_rate': 8.985841290747449e-06, 'epoch': 2.89}
+{'eval_loss': 0.2340913712978363, 'eval_precision': 0.7338883749614554, 'eval_recall': 0.6778695528339505, 'eval_f1': 0.7047675451584247, 'eval_accuracy': 0.9207472090195645, 'eval_runtime': 8.5647, 'eval_samples_per_second': 89.787, 'eval_steps_per_second': 11.326, 'epoch': 3.0}
+{'loss': 0.2159, 'learning_rate': 8.821205136648009e-06, 'epoch': 3.11}
+{'loss': 0.1999, 'learning_rate': 8.65656898254857e-06, 'epoch': 3.33}
+{'loss': 0.2002, 'learning_rate': 8.491932828449127e-06, 'epoch': 3.56}
+{'loss': 0.1817, 'learning_rate': 8.327296674349687e-06, 'epoch': 3.78}
+{'loss': 0.1951, 'learning_rate': 8.162660520250248e-06, 'epoch': 4.0}
+{'eval_loss': 0.22724777460098267, 'eval_precision': 0.7249575551782682, 'eval_recall': 0.7297066362859584, 'eval_f1': 0.7273243435060327, 'eval_accuracy': 0.9240632253785785, 'eval_runtime': 8.7889, 'eval_samples_per_second': 87.497, 'eval_steps_per_second': 11.037, 'epoch': 4.0}
+{'loss': 0.1804, 'learning_rate': 7.998024366150807e-06, 'epoch': 4.22}
+{'loss': 0.1864, 'learning_rate': 7.833388212051367e-06, 'epoch': 4.44}
+{'loss': 0.1654, 'learning_rate': 7.668752057951926e-06, 'epoch': 4.67}
+{'loss': 0.1652, 'learning_rate': 7.504115903852487e-06, 'epoch': 4.89}
+{'eval_loss': 0.23323500156402588, 'eval_precision': 0.7075088099756032, 'eval_recall': 0.743377954998576, 'eval_f1': 0.725, 'eval_accuracy': 0.9226999742087616, 'eval_runtime': 10.5679, 'eval_samples_per_second': 72.768, 'eval_steps_per_second': 9.179, 'epoch': 5.0}
+{'loss': 0.1699, 'learning_rate': 7.339479749753047e-06, 'epoch': 5.11}
+{'loss': 0.1553, 'learning_rate': 7.174843595653606e-06, 'epoch': 5.33}
+{'loss': 0.1625, 'learning_rate': 7.010207441554166e-06, 'epoch': 5.56}
+{'loss': 0.1558, 'learning_rate': 6.845571287454725e-06, 'epoch': 5.78}
+{'loss': 0.1558, 'learning_rate': 6.6809351333552856e-06, 'epoch': 6.0}
+{'eval_loss': 0.23031941056251526, 'eval_precision': 0.7191836734693877, 'eval_recall': 0.7527769866135005, 'eval_f1': 0.735596994155302, 'eval_accuracy': 0.92439482701448, 'eval_runtime': 9.4241, 'eval_samples_per_second': 81.599, 'eval_steps_per_second': 10.293, 'epoch': 6.0}
+{'loss': 0.1385, 'learning_rate': 6.516298979255845e-06, 'epoch': 6.22}
+{'loss': 0.1433, 'learning_rate': 6.351662825156405e-06, 'epoch': 6.44}
+{'loss': 0.1529, 'learning_rate': 6.187026671056965e-06, 'epoch': 6.67}
+{'loss': 0.1443, 'learning_rate': 6.022390516957525e-06, 'epoch': 6.89}
+{'eval_loss': 0.2421521246433258, 'eval_precision': 0.7550335570469798, 'eval_recall': 0.7049273711193392, 'eval_f1': 0.7291206363234645, 'eval_accuracy': 0.9266423492133672, 'eval_runtime': 9.7232, 'eval_samples_per_second': 79.089, 'eval_steps_per_second': 9.976, 'epoch': 7.0}
+{'loss': 0.1298, 'learning_rate': 5.8577543628580845e-06, 'epoch': 7.11}
+{'loss': 0.1271, 'learning_rate': 5.693118208758643e-06, 'epoch': 7.33}
+{'loss': 0.1466, 'learning_rate': 5.528482054659203e-06, 'epoch': 7.56}
+{'loss': 0.1283, 'learning_rate': 5.363845900559763e-06, 'epoch': 7.78}
+{'loss': 0.1315, 'learning_rate': 5.199209746460323e-06, 'epoch': 8.0}
+{'eval_loss': 0.23562796413898468, 'eval_precision': 0.7420104590354445, 'eval_recall': 0.7274280831671889, 'eval_f1': 0.7346469150007192, 'eval_accuracy': 0.9269371062230574, 'eval_runtime': 9.4685, 'eval_samples_per_second': 81.216, 'eval_steps_per_second': 10.244, 'epoch': 8.0}
+{'loss': 0.1279, 'learning_rate': 5.034573592360883e-06, 'epoch': 8.22}
+{'loss': 0.1135, 'learning_rate': 4.869937438261443e-06, 'epoch': 8.44}
+{'loss': 0.122, 'learning_rate': 4.705301284162002e-06, 'epoch': 8.67}
+{'loss': 0.1211, 'learning_rate': 4.540665130062562e-06, 'epoch': 8.89}
+{'eval_loss': 0.2442295402288437, 'eval_precision': 0.7557863501483679, 'eval_recall': 0.7254343491882654, 'eval_f1': 0.7402993750908297, 'eval_accuracy': 0.9281161342618179, 'eval_runtime': 9.0939, 'eval_samples_per_second': 84.562, 'eval_steps_per_second': 10.666, 'epoch': 9.0}
+{'loss': 0.1159, 'learning_rate': 4.376028975963122e-06, 'epoch': 9.11}
+{'loss': 0.108, 'learning_rate': 4.2113928218636815e-06, 'epoch': 9.33}
+{'loss': 0.1171, 'learning_rate': 4.046756667764241e-06, 'epoch': 9.56}
+{'loss': 0.1102, 'learning_rate': 3.882120513664801e-06, 'epoch': 9.78}
+{'loss': 0.1181, 'learning_rate': 3.7174843595653607e-06, 'epoch': 10.0}
+{'eval_loss': 0.24937361478805542, 'eval_precision': 0.7378917378917379, 'eval_recall': 0.737681572201652, 'eval_f1': 0.7377866400797607, 'eval_accuracy': 0.9270844847279024, 'eval_runtime': 9.0444, 'eval_samples_per_second': 85.025, 'eval_steps_per_second': 10.725, 'epoch': 10.0}
+{'loss': 0.1096, 'learning_rate': 3.5528482054659206e-06, 'epoch': 10.22}
+{'loss': 0.1019, 'learning_rate': 3.38821205136648e-06, 'epoch': 10.44}
+{'loss': 0.105, 'learning_rate': 3.22357589726704e-06, 'epoch': 10.67}
+{'loss': 0.0978, 'learning_rate': 3.0589397431675998e-06, 'epoch': 10.89}
+{'eval_loss': 0.2613998353481293, 'eval_precision': 0.7498543972044264, 'eval_recall': 0.733409285103959, 'eval_f1': 0.7415406767458604, 'eval_accuracy': 0.9276739987472827, 'eval_runtime': 9.3343, 'eval_samples_per_second': 82.384, 'eval_steps_per_second': 10.392, 'epoch': 11.0}
+{'loss': 0.1173, 'learning_rate': 2.8943035890681596e-06, 'epoch': 11.11}
+{'loss': 0.0972, 'learning_rate': 2.729667434968719e-06, 'epoch': 11.33}
+{'loss': 0.0992, 'learning_rate': 2.565031280869279e-06, 'epoch': 11.56}
+{'loss': 0.1054, 'learning_rate': 2.400395126769839e-06, 'epoch': 11.78}
+{'loss': 0.0928, 'learning_rate': 2.2357589726703983e-06, 'epoch': 12.0}
+{'eval_loss': 0.2643241286277771, 'eval_precision': 0.742406876790831, 'eval_recall': 0.7379663913414981, 'eval_f1': 0.7401799742893873, 'eval_accuracy': 0.9275266202424376, 'eval_runtime': 8.0278, 'eval_samples_per_second': 95.792, 'eval_steps_per_second': 12.083, 'epoch': 12.0}
+{'loss': 0.0906, 'learning_rate': 2.071122818570958e-06, 'epoch': 12.22}
+{'loss': 0.0949, 'learning_rate': 1.906486664471518e-06, 'epoch': 12.44}
+{'loss': 0.1071, 'learning_rate': 1.741850510372078e-06, 'epoch': 12.67}
+{'loss': 0.1039, 'learning_rate': 1.5772143562726376e-06, 'epoch': 12.89}
+{'eval_loss': 0.2680654227733612, 'eval_precision': 0.7349059253018815, 'eval_recall': 0.7453716889774993, 'eval_f1': 0.740101809954751, 'eval_accuracy': 0.9270107954754799, 'eval_runtime': 7.4068, 'eval_samples_per_second': 103.823, 'eval_steps_per_second': 13.096, 'epoch': 13.0}
+{'loss': 0.0919, 'learning_rate': 1.4125782021731974e-06, 'epoch': 13.11}
+{'loss': 0.0931, 'learning_rate': 1.247942048073757e-06, 'epoch': 13.33}
+{'loss': 0.1059, 'learning_rate': 1.0833058939743168e-06, 'epoch': 13.56}
+{'loss': 0.1006, 'learning_rate': 9.186697398748766e-07, 'epoch': 13.78}
+{'loss': 0.0852, 'learning_rate': 7.540335857754363e-07, 'epoch': 14.0}
+{'eval_loss': 0.2702557444572449, 'eval_precision': 0.7463203463203463, 'eval_recall': 0.7365422956422671, 'eval_f1': 0.7413990825688073, 'eval_accuracy': 0.9278950665045503, 'eval_runtime': 7.146, 'eval_samples_per_second': 107.612, 'eval_steps_per_second': 13.574, 'epoch': 14.0}
+{'loss': 0.0841, 'learning_rate': 5.893974316759961e-07, 'epoch': 14.22}
+{'loss': 0.0894, 'learning_rate': 4.247612775765558e-07, 'epoch': 14.44}
+{'loss': 0.0974, 'learning_rate': 2.601251234771156e-07, 'epoch': 14.67}
+{'loss': 0.0999, 'learning_rate': 9.548896937767534e-08, 'epoch': 14.89}
+{'eval_loss': 0.27016523480415344, 'eval_precision': 0.7454334589736156, 'eval_recall': 0.7322700085445742, 'eval_f1': 0.7387931034482759, 'eval_accuracy': 0.9274160863638038, 'eval_runtime': 7.3848, 'eval_samples_per_second': 104.132, 'eval_steps_per_second': 13.135, 'epoch': 15.0}
+{'train_runtime': 2395.4073, 'train_samples_per_second': 22.531, 'train_steps_per_second': 1.409, 'train_loss': 0.21150326792399088, 'epoch': 15.0}
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3375/3375 [39:55<00:00,  1.41it/s]
+
+🧪 Running final evaluation on held-out test set...
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 97/97 [00:07<00:00, 13.40it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 97/97 [00:07<00:00, 13.45it/s]
+
+📈 ── Test Set Results ──────────────────────────
+  Loss      : 0.2478
+  Precision : 0.7494
+  Recall    : 0.7471
+  F1 Score  : 0.7483
+  Accuracy  : 0.9287
+
+📋 ── Per-Entity Report ─────────────────────────
+  ENZYME                P=0.7889  R=0.7984  F1=0.7936  Support=1250
+  RELATION              P=0.6787  R=0.6617  F1=0.6701  Support=878
+  SUBSTRATE             P=0.7570  R=0.7549  F1=0.7560  Support=1387
+
+💾 Test metrics saved to test_metrics.json
+
+💾 Saving best PubMedBERT model...
+
+✅ PubMedBERT Training Completed Successfully!
+
+(torch_gpu) C:\SASTRA\BioNER_project>

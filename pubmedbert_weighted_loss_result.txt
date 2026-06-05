@@ -1,0 +1,131 @@
+(torch_gpu) C:\SASTRA\BioNER_project>python pubmedbert_weighted_v1.py
+🔥 Using device: cuda
+Clean samples: 5138
+📊 Class weights: tensor([  1.2055,  23.2228,  45.8763,  20.7015,  50.0081,  32.0529, 164.1592],
+       device='cuda:0')
+C:\Users\kisho\anaconda3\envs\torch_gpu\lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 4110/4110 [00:01<00:00, 2074.64 examples/s]
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 1028/1028 [00:00<00:00, 2634.77 examples/s]
+Some weights of the model checkpoint at microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract were not used when initializing BertForTokenClassification: ['cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.bias', 'cls.predictions.decoder.weight']
+- This IS expected if you are initializing BertForTokenClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForTokenClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertForTokenClassification were not initialized from the model checkpoint at microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+🚀 PubMedBERT (Class-Weighted) Training Started
+
+C:\Users\kisho\anaconda3\envs\torch_gpu\lib\site-packages\transformers\optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+  0%|                                                                                                                             | 0/5140 [00:00<?, ?it/s]You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+{'loss': 2.1031, 'learning_rate': 1.7898832684824904e-06, 'epoch': 0.05}
+{'loss': 1.9851, 'learning_rate': 3.7354085603112846e-06, 'epoch': 0.1}
+{'loss': 1.6992, 'learning_rate': 5.680933852140078e-06, 'epoch': 0.15}
+{'loss': 1.3772, 'learning_rate': 7.626459143968872e-06, 'epoch': 0.19}
+{'loss': 1.1133, 'learning_rate': 9.571984435797666e-06, 'epoch': 0.24}
+{'loss': 0.8013, 'learning_rate': 1.151750972762646e-05, 'epoch': 0.29}
+{'loss': 0.7524, 'learning_rate': 1.3463035019455255e-05, 'epoch': 0.34}
+{'loss': 0.6554, 'learning_rate': 1.540856031128405e-05, 'epoch': 0.39}
+{'loss': 0.76, 'learning_rate': 1.7354085603112842e-05, 'epoch': 0.44}
+{'loss': 0.6973, 'learning_rate': 1.9299610894941637e-05, 'epoch': 0.49}
+{'loss': 0.6385, 'learning_rate': 1.9861651534803287e-05, 'epoch': 0.54}
+{'loss': 0.6011, 'learning_rate': 1.964548205793342e-05, 'epoch': 0.58}
+{'loss': 0.6647, 'learning_rate': 1.9429312581063555e-05, 'epoch': 0.63}
+{'loss': 0.658, 'learning_rate': 1.921314310419369e-05, 'epoch': 0.68}
+{'loss': 0.6234, 'learning_rate': 1.8996973627323823e-05, 'epoch': 0.73}
+{'loss': 0.4969, 'learning_rate': 1.8785127539991355e-05, 'epoch': 0.78}
+{'loss': 0.5111, 'learning_rate': 1.8568958063121488e-05, 'epoch': 0.83}
+{'loss': 0.4417, 'learning_rate': 1.8352788586251624e-05, 'epoch': 0.88}
+{'loss': 0.5152, 'learning_rate': 1.8136619109381756e-05, 'epoch': 0.92}
+{'loss': 0.6293, 'learning_rate': 1.792044963251189e-05, 'epoch': 0.97}
+{'eval_loss': 0.4969334006309509, 'eval_runtime': 18.9748, 'eval_samples_per_second': 54.177, 'eval_steps_per_second': 13.544, 'epoch': 1.0}
+{'loss': 0.4319, 'learning_rate': 1.7704280155642024e-05, 'epoch': 1.02}
+{'loss': 0.3879, 'learning_rate': 1.748811067877216e-05, 'epoch': 1.07}
+{'loss': 0.4619, 'learning_rate': 1.7271941201902292e-05, 'epoch': 1.12}
+{'loss': 0.5043, 'learning_rate': 1.7055771725032424e-05, 'epoch': 1.17}
+{'loss': 0.3965, 'learning_rate': 1.683960224816256e-05, 'epoch': 1.22}
+{'loss': 0.516, 'learning_rate': 1.6623432771292696e-05, 'epoch': 1.26}
+{'loss': 0.3399, 'learning_rate': 1.640726329442283e-05, 'epoch': 1.31}
+{'loss': 0.4641, 'learning_rate': 1.6191093817552964e-05, 'epoch': 1.36}
+{'loss': 0.4535, 'learning_rate': 1.5974924340683096e-05, 'epoch': 1.41}
+{'loss': 0.5112, 'learning_rate': 1.575875486381323e-05, 'epoch': 1.46}
+{'loss': 0.3763, 'learning_rate': 1.5542585386943365e-05, 'epoch': 1.51}
+{'loss': 0.4861, 'learning_rate': 1.53264159100735e-05, 'epoch': 1.56}
+{'loss': 0.4669, 'learning_rate': 1.5110246433203633e-05, 'epoch': 1.61}
+{'loss': 0.4392, 'learning_rate': 1.4894076956333767e-05, 'epoch': 1.65}
+{'loss': 0.4447, 'learning_rate': 1.4677907479463899e-05, 'epoch': 1.7}
+{'loss': 0.4199, 'learning_rate': 1.4461738002594035e-05, 'epoch': 1.75}
+{'loss': 0.4128, 'learning_rate': 1.4245568525724169e-05, 'epoch': 1.8}
+{'loss': 0.3654, 'learning_rate': 1.4029399048854301e-05, 'epoch': 1.85}
+{'loss': 0.4252, 'learning_rate': 1.3813229571984437e-05, 'epoch': 1.9}
+{'loss': 0.4254, 'learning_rate': 1.3597060095114571e-05, 'epoch': 1.95}
+{'loss': 0.3916, 'learning_rate': 1.3380890618244703e-05, 'epoch': 1.99}
+{'eval_loss': 0.4787518382072449, 'eval_runtime': 17.8126, 'eval_samples_per_second': 57.712, 'eval_steps_per_second': 14.428, 'epoch': 2.0}
+{'loss': 0.379, 'learning_rate': 1.3164721141374839e-05, 'epoch': 2.04}
+{'loss': 0.2626, 'learning_rate': 1.2948551664504973e-05, 'epoch': 2.09}
+{'loss': 0.2967, 'learning_rate': 1.2732382187635105e-05, 'epoch': 2.14}
+{'loss': 0.3633, 'learning_rate': 1.2516212710765241e-05, 'epoch': 2.19}
+{'loss': 0.3173, 'learning_rate': 1.2300043233895375e-05, 'epoch': 2.24}
+{'loss': 0.3621, 'learning_rate': 1.2083873757025508e-05, 'epoch': 2.29}
+{'loss': 0.3113, 'learning_rate': 1.1867704280155643e-05, 'epoch': 2.33}
+{'loss': 0.2597, 'learning_rate': 1.1651534803285777e-05, 'epoch': 2.38}
+{'loss': 0.364, 'learning_rate': 1.143536532641591e-05, 'epoch': 2.43}
+{'loss': 0.3903, 'learning_rate': 1.1219195849546045e-05, 'epoch': 2.48}
+{'loss': 0.2809, 'learning_rate': 1.100302637267618e-05, 'epoch': 2.53}
+{'loss': 0.2892, 'learning_rate': 1.0786856895806312e-05, 'epoch': 2.58}
+{'loss': 0.328, 'learning_rate': 1.0570687418936448e-05, 'epoch': 2.63}
+{'loss': 0.333, 'learning_rate': 1.0354517942066582e-05, 'epoch': 2.68}
+{'loss': 0.3474, 'learning_rate': 1.0138348465196714e-05, 'epoch': 2.72}
+{'loss': 0.301, 'learning_rate': 9.92217898832685e-06, 'epoch': 2.77}
+{'loss': 0.3107, 'learning_rate': 9.706009511456984e-06, 'epoch': 2.82}
+{'loss': 0.3163, 'learning_rate': 9.489840034587116e-06, 'epoch': 2.87}
+{'loss': 0.2423, 'learning_rate': 9.273670557717252e-06, 'epoch': 2.92}
+{'loss': 0.3771, 'learning_rate': 9.057501080847386e-06, 'epoch': 2.97}
+{'eval_loss': 0.4914140999317169, 'eval_runtime': 18.8166, 'eval_samples_per_second': 54.633, 'eval_steps_per_second': 13.658, 'epoch': 3.0}
+{'loss': 0.3035, 'learning_rate': 8.841331603977518e-06, 'epoch': 3.02}
+{'loss': 0.2695, 'learning_rate': 8.625162127107654e-06, 'epoch': 3.06}
+{'loss': 0.2499, 'learning_rate': 8.408992650237786e-06, 'epoch': 3.11}
+{'loss': 0.1909, 'learning_rate': 8.19282317336792e-06, 'epoch': 3.16}
+{'loss': 0.2065, 'learning_rate': 7.976653696498056e-06, 'epoch': 3.21}
+{'loss': 0.2007, 'learning_rate': 7.760484219628189e-06, 'epoch': 3.26}
+{'loss': 0.2698, 'learning_rate': 7.544314742758323e-06, 'epoch': 3.31}
+{'loss': 0.2139, 'learning_rate': 7.328145265888457e-06, 'epoch': 3.36}
+{'loss': 0.2951, 'learning_rate': 7.1119757890185915e-06, 'epoch': 3.4}
+{'loss': 0.2656, 'learning_rate': 6.895806312148725e-06, 'epoch': 3.45}
+{'loss': 0.3061, 'learning_rate': 6.679636835278859e-06, 'epoch': 3.5}
+{'loss': 0.2243, 'learning_rate': 6.463467358408994e-06, 'epoch': 3.55}
+{'loss': 0.2088, 'learning_rate': 6.247297881539127e-06, 'epoch': 3.6}
+{'loss': 0.2034, 'learning_rate': 6.031128404669261e-06, 'epoch': 3.65}
+{'loss': 0.2249, 'learning_rate': 5.814958927799396e-06, 'epoch': 3.7}
+{'loss': 0.236, 'learning_rate': 5.598789450929529e-06, 'epoch': 3.75}
+{'loss': 0.1768, 'learning_rate': 5.382619974059663e-06, 'epoch': 3.79}
+{'loss': 0.2526, 'learning_rate': 5.166450497189798e-06, 'epoch': 3.84}
+{'loss': 0.1867, 'learning_rate': 4.954604409857329e-06, 'epoch': 3.89}
+{'loss': 0.27, 'learning_rate': 4.738434932987462e-06, 'epoch': 3.94}
+{'loss': 0.2466, 'learning_rate': 4.522265456117597e-06, 'epoch': 3.99}
+{'eval_loss': 0.6129259467124939, 'eval_runtime': 17.9213, 'eval_samples_per_second': 57.362, 'eval_steps_per_second': 14.341, 'epoch': 4.0}
+{'loss': 0.191, 'learning_rate': 4.306095979247731e-06, 'epoch': 4.04}
+{'loss': 0.186, 'learning_rate': 4.089926502377864e-06, 'epoch': 4.09}
+{'loss': 0.1835, 'learning_rate': 3.873757025507999e-06, 'epoch': 4.13}
+{'loss': 0.1764, 'learning_rate': 3.6575875486381323e-06, 'epoch': 4.18}
+{'loss': 0.1675, 'learning_rate': 3.4414180717682667e-06, 'epoch': 4.23}
+{'loss': 0.2481, 'learning_rate': 3.2252485948984008e-06, 'epoch': 4.28}
+{'loss': 0.2146, 'learning_rate': 3.0090791180285344e-06, 'epoch': 4.33}
+{'loss': 0.1863, 'learning_rate': 2.792909641158669e-06, 'epoch': 4.38}
+{'loss': 0.2328, 'learning_rate': 2.5767401642888025e-06, 'epoch': 4.43}
+{'loss': 0.1684, 'learning_rate': 2.3605706874189365e-06, 'epoch': 4.47}
+{'loss': 0.1477, 'learning_rate': 2.1444012105490706e-06, 'epoch': 4.52}
+{'loss': 0.1989, 'learning_rate': 1.9282317336792046e-06, 'epoch': 4.57}
+{'loss': 0.2376, 'learning_rate': 1.7120622568093387e-06, 'epoch': 4.62}
+{'loss': 0.229, 'learning_rate': 1.4958927799394727e-06, 'epoch': 4.67}
+{'loss': 0.1722, 'learning_rate': 1.2797233030696066e-06, 'epoch': 4.72}
+{'loss': 0.2075, 'learning_rate': 1.0635538261997406e-06, 'epoch': 4.77}
+{'loss': 0.2076, 'learning_rate': 8.473843493298748e-07, 'epoch': 4.82}
+{'loss': 0.2242, 'learning_rate': 6.355382619974059e-07, 'epoch': 4.86}
+{'loss': 0.2163, 'learning_rate': 4.1936878512754e-07, 'epoch': 4.91}
+{'loss': 0.1939, 'learning_rate': 2.0319930825767404e-07, 'epoch': 4.96}
+{'eval_loss': 0.6728494167327881, 'eval_runtime': 19.6953, 'eval_samples_per_second': 52.195, 'eval_steps_per_second': 13.049, 'epoch': 5.0}
+{'train_runtime': 1728.9473, 'train_samples_per_second': 11.886, 'train_steps_per_second': 2.973, 'train_loss': 0.41290766515620486, 'epoch': 5.0}
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5140/5140 [28:48<00:00,  2.97it/s]
+
+✅ Training Finished Successfully!
