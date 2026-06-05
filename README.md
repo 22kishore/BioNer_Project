@@ -205,5 +205,3 @@ I independently conducted experiments to compare model behavior, investigate fai
 * Study model reliability under distribution shifts
 
 ---
-
-This README is strong enough for a fellowship submission because it highlights not only the model-building aspects but also the **evaluation, error analysis, and reliability perspective** that programs like SpecFromPractice, Claimcheck, and BabelBench value.
