@@ -145,11 +145,15 @@ BioBERT / PubMedBERT
 
 ## Key Findings
 
-* Transformer-based models significantly improve biomedical entity recognition performance compared to traditional approaches.
-* Domain-specific pretraining provides better understanding of biomedical terminology.
-* Model performance varies across entity categories.
-* Rare entities and ambiguous terminology remain challenging.
-* Evaluation beyond aggregate metrics is necessary to understand real-world model behavior.
+* Successfully fine-tuned PubMedBERT on a custom biomedical NER dataset consisting of 5,138 annotated samples.
+* Achieved an overall test F1-score of 74.83% with 92.87% token-level accuracy.
+* The model showed strong performance in identifying enzyme entities, achieving an F1-score of 79.36%.
+* Substrate recognition achieved an F1-score of 75.60%, demonstrating effective understanding of biochemical terminology.
+* Relation extraction remained the most challenging category with an F1-score of 67.01%, highlighting the difficulty of capturing contextual biological relationships.
+* Training loss steadily decreased from 2.35 to below 0.10, indicating successful convergence.
+* Performance improvements plateaued after approximately 9–11 epochs, suggesting that further training offered limited gains.
+* Detailed error analysis revealed that ambiguous terminology, overlapping entity boundaries, and rare biological terms contributed most to prediction errors.
+* Results demonstrate that domain-specific language models such as PubMedBERT significantly improve biomedical information extraction compared to traditional NLP approaches.
 
 ---
 
