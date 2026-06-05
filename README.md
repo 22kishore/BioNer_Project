@@ -1,211 +1,326 @@
-# Biomedical Named Entity Recognition using BioBERT and PubMedBERT
+<div align="center">
 
-## Overview
+# 🧬 Biomedical NER — LPMO Knowledge Graph
 
-This project focuses on **Biomedical Named Entity Recognition (BioNER)** using transformer-based language models, specifically **BioBERT** and **PubMedBERT**, to automatically identify and classify biomedical entities from scientific literature.
+### Named Entity Recognition with BioBERT & PubMedBERT → Neo4j Knowledge Graph
 
-Biomedical literature contains vast amounts of information related to genes, proteins, diseases, chemicals, drugs, and biological processes. Manually extracting this information is time-consuming and difficult to scale. This project aims to automate the extraction process by leveraging state-of-the-art Natural Language Processing (NLP) techniques.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-GPU-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co)
+[![Neo4j](https://img.shields.io/badge/Neo4j-Knowledge%20Graph-008CC1?style=flat-square&logo=neo4j&logoColor=white)](https://neo4j.com)
+[![ISMB 2026](https://img.shields.io/badge/ISMB%202026-Accepted-brightgreen?style=flat-square)](https://www.iscb.org/ismb2026)
 
-The project also emphasizes **model evaluation and error analysis**, helping understand not only how well the model performs but also where and why it fails.
+</div>
 
 ---
 
-## Problem Statement
+## 📌 Overview
+
+This project focuses on **Biomedical Named Entity Recognition (BioNER)** using transformer-based language models — **BioBERT** and **PubMedBERT** — to automatically identify and classify biomedical entities from scientific literature, with a downstream goal of constructing a **domain-specific Knowledge Graph** for LPMO *(Lytic Polysaccharide Monooxygenase)* research.
+
+> LPMOs are copper-dependent enzymes critical to biomass conversion and biofuel production. Knowledge about their interactions is scattered across a rapidly growing body of literature — this pipeline makes it structured and queryable.
+
+The project also emphasizes **model evaluation and error analysis**, helping understand not only how well the model performs, but where and why it fails.
+
+---
+
+## 🏆 Results at a Glance
+
+<div align="center">
+
+| Metric | Score |
+|---|---|
+| **Overall F1** | **74.83%** |
+| **Accuracy** | **92.87%** |
+| ENZYME F1 | 79.36% |
+| SUBSTRATE F1 | 75.60% |
+| RELATION F1 | 67.01% |
+
+</div>
+
+<details>
+<summary><b>Full per-entity breakdown</b></summary>
+
+| Entity | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| ENZYME | 78.89% | 79.84% | **79.36%** | 1,250 |
+| SUBSTRATE | 75.70% | 75.49% | **75.60%** | 1,387 |
+| RELATION | 67.87% | 66.17% | **67.01%** | 878 |
+| **Overall** | **74.94%** | **74.71%** | **74.83%** | 3,515 |
+
+</details>
+
+---
+
+## 🗂️ Repository Structure
+
+```
+Bio_NER/
+├── main_project.py                    # BioBERT fine-tuning (80/20 split)
+├── pubmain_project.py                 # PubMedBERT fine-tuning
+├── pubmed_model_combined_70_15_15.py  # PubMedBERT (70/15/15 split) ← best model
+├── pubmed_model_70_15_15_2.py
+├── pubmedbert_model_v2_improved.py
+├── pubmedbert_weighted_v1.py
+├── pubmain_project_crf.py             # CRF variant experiments
+├── pubmain_project_crf_2.py
+├── test_model.py                      # Inference & testing
+├── test_2.py
+├── final_extractor.py                 # Entity extraction pipeline
+├── triples_with_genes.py              # Triple generation for KG
+├── generate_graph.py                  # Graph building utilities
+├── visualize_graph.py                 # Graph visualization
+├── universal_fix.py                   # Dataset normalization utilities
+├── verify_data.py                     # Data validation
+│
+├── train.json                         # Annotated dataset (3,178 samples)
+├── train_vennila.json                 # Second annotated dataset (1,960 samples)
+├── predicted_ner_tags.json            # Model predictions output
+├── test_metrics.json                  # Test set metrics (PubMedBERT best)
+├── test_metrics_improved.json         # Metrics from improved run
+│
+├── triples.csv                        # Extracted entity triples (8,065)
+├── nodes.csv / nodes_knet.csv         # KG nodes (119)
+├── edges.csv / edges_knet.csv         # KG edges (257)
+├── final_knowledge_graph.csv          # Complete KG export
+├── neo4j_query_table_data_2026-4-8.csv
+├── 1_all_words.csv
+├── 2_knowledge_graph.csv
+│
+├── svein_horn_papers.txt              # Source literature corpus
+├── input_data.txt
+├── biobert_Model_result.txt           # BioBERT training logs
+├── pubmed_model_result.txt            # PubMedBERT training logs
+├── pubmed_model_combined_70_15_15_results.txt
+├── pubmedbert_weighted_loss_result.txt
+│
+├── kishore dataset.xlsx               # Dataset overview
+├── test_result_Edward_A._Bayer.xlsx   # Per-author test results
+├── final_network_diagram.png          # Knowledge graph visualization
+│
+├── Long_abstract_ISMB_2026.pdf/.docx  # ISMB 2026 submission
+└── short_abstract_ISMB_2026.docx
+```
+
+---
+
+## 🔬 Problem Statement
 
 Biomedical researchers generate millions of publications every year. Extracting structured information from these documents is essential for:
 
-* Biomedical knowledge discovery
-* Literature mining
-* Clinical decision support systems
-* Knowledge graph construction
-* Drug discovery and genomics research
+- 🔍 Biomedical knowledge discovery
+- 📚 Literature mining
+- 🏥 Clinical decision support systems
+- 🕸️ Knowledge graph construction
+- 💊 Drug discovery and genomics research
 
 Traditional rule-based systems struggle with the complexity of biomedical terminology. This project investigates whether transformer-based models can improve entity recognition performance while maintaining robustness across diverse biomedical texts.
 
 ---
 
-## Objectives
+## 🎯 Objectives
 
-* Develop a Biomedical Named Entity Recognition system using transformer-based models.
-* Fine-tune domain-specific language models on biomedical datasets.
-* Evaluate model performance using standard NER metrics.
-* Analyze model errors and failure modes.
-* Explore challenges associated with reliable biomedical information extraction.
-
----
-
-## Models Used
-
-### BioBERT
-
-BioBERT is a domain-specific language model based on BERT and pre-trained on large biomedical corpora including PubMed abstracts and PMC full-text articles.
-
-### PubMedBERT
-
-PubMedBERT is trained exclusively on biomedical literature, enabling stronger understanding of domain-specific terminology and contextual relationships.
+- Develop a BioNER system using transformer-based models
+- Fine-tune domain-specific language models (BioBERT, PubMedBERT) on a custom LPMO dataset
+- Evaluate model performance using standard NER metrics (Precision, Recall, F1)
+- Analyze model errors and failure modes
+- Construct a domain-specific Knowledge Graph from extracted entities and relationships using Neo4j
+- Explore challenges associated with reliable biomedical information extraction
 
 ---
 
-## Methodology
+## 🤖 Models Used
 
-### 1. Data Preparation
+### BioBERT — `dmis-lab/biobert-v1.1`
 
-* Dataset collection and preprocessing
-* Text normalization
-* Label formatting using BIO tagging
-* Train-validation-test split generation
+Pre-trained on PubMed abstracts and PMC full-text articles. Fine-tuned on the merged dataset (5,138 samples) using an **80/20** train-test split. Achieved ~69.5% overall F1.
 
-### 2. Tokenization
+### PubMedBERT — `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract` ⭐ Best
 
-* Biomedical text tokenization
-* Token-label alignment
-* Handling sub-word tokens
-
-### 3. Model Fine-Tuning
-
-* Fine-tuning BioBERT and PubMedBERT models
-* Hyperparameter optimization
-* Training and validation monitoring
-
-### 4. Evaluation
-
-Models were evaluated using:
-
-* Precision
-* Recall
-* F1 Score
-
-Additional evaluation focused on:
-
-* Entity-level performance
-* Class-wise analysis
-* Error categorization
-
-### 5. Error Analysis
-
-Detailed investigation of:
-
-* False positives
-* False negatives
-* Ambiguous biomedical terminology
-* Rare entity types
-* Boundary detection errors
+Trained exclusively on PubMed abstracts — stronger domain vocabulary. Fine-tuned on `train.json` (3,178 samples) using a **70/15/15** train-validation-test split. Achieved **74.83% F1** — the best result.
 
 ---
 
-## Technologies Used
+## 🛠️ Methodology
 
-### Programming Languages
+### 1 · Data Preparation
 
-* Python
+- Dataset curated from titles and abstracts of **14 LPMO-focused authors**
+- Manually annotated into four entity categories using **BIO tagging**:
 
-### Libraries and Frameworks
+  | Tag | Entity | Examples |
+  |---|---|---|
+  | `B-ENZYME` / `I-ENZYME` | Enzyme names | LpCel5A, LPMO, GH61 |
+  | `B-SUBSTRATE` / `I-SUBSTRATE` | Biochemical substrates | cellulose, chitin, xylan |
+  | `B-RELATION` / `I-RELATION` | Biological relationships | oxidizes, cleaves, binds |
+  | `O` | All other tokens | — |
 
-* Transformers (Hugging Face)
-* PyTorch
-* NumPy
-* Pandas
-* Scikit-learn
+- Source files: `train.json` (3,178) + `train_vennila.json` (1,960) → **5,138 total samples**
+- Splits: **70 / 15 / 15** (PubMedBERT) · **80 / 20** (BioBERT)
 
-### Development Environment
+### 2 · Tokenization
 
-* Jupyter Notebook
-* Google Colab
-* Linux
+- Model-specific fast tokenizers (BertTokenizerFast)
+- Sub-word token handling: label assigned to **first sub-token**, `-100` for the rest
+- Handles variable-length sequences up to 512 tokens
 
----
+### 3 · Model Fine-Tuning
 
-## Project Workflow
+- `BertForTokenClassification` with 7 output labels (`O`, `B/I-ENZYME`, `B/I-SUBSTRATE`, `B/I-RELATION`)
+- AdamW optimizer with linear learning rate warmup
+- Early stopping based on validation F1
+- GPU training on **NVIDIA GeForce RTX 2050** (CUDA)
 
+### 4 · Evaluation
 
-  Biomedical Text
-        │
-        ▼
-Data Preprocessing
-        │
-        ▼
-  Tokenization
-        │
-        ▼
-BioBERT / PubMedBERT
-        │
-        ▼
-    Fine-Tuning
-        │
-        ▼
-    Prediction
-        │
-        ▼
-    Evaluation
-        │
-        ▼
-  Error Analysis
+Metrics computed using **seqeval** (entity-level, not token-level):
 
----
+- Precision · Recall · F1 Score · Token-level Accuracy
+- Per-class breakdown: ENZYME, SUBSTRATE, RELATION
 
-## Key Findings
+### 5 · Knowledge Graph Construction
 
-* Successfully fine-tuned PubMedBERT on a custom biomedical NER dataset consisting of 5,138 annotated samples.
-* Achieved an overall test F1-score of 74.83% with 92.87% token-level accuracy.
-* The model showed strong performance in identifying enzyme entities, achieving an F1-score of 79.36%.
-* Substrate recognition achieved an F1-score of 75.60%, demonstrating effective understanding of biochemical terminology.
-* Relation extraction remained the most challenging category with an F1-score of 67.01%, highlighting the difficulty of capturing contextual biological relationships.
-* Training loss steadily decreased from 2.35 to below 0.10, indicating successful convergence.
-* Performance improvements plateaued after approximately 9–11 epochs, suggesting that further training offered limited gains.
-* Detailed error analysis revealed that ambiguous terminology, overlapping entity boundaries, and rare biological terms contributed most to prediction errors.
-* Results demonstrate that domain-specific language models such as PubMedBERT significantly improve biomedical information extraction compared to traditional NLP approaches.
+After NER, extracted triples were loaded into **Neo4j**:
 
----
+```
+(ENZYME) --[RELATION]--> (SUBSTRATE)
+e.g. (LpAA9A) --[oxidizes]--> (cellulose)
+```
 
-## Challenges Encountered
+| KG Stat | Count |
+|---|---|
+| Nodes | 119 |
+| Edges | 257 |
+| Triples | 8,065 |
+| Final KG records | 2,874 |
 
-* Complex biomedical vocabulary
-* Imbalanced entity distributions
-* Annotation inconsistencies
-* Long scientific sentences
-* Domain-specific abbreviations and acronyms
+Designed for future integration with [KnetMiner](https://knetminer.com).
 
-These challenges highlighted the importance of careful evaluation and robust benchmarking when deploying NLP systems in scientific and healthcare domains.
+### 6 · Error Analysis
+
+- False positives / false negatives per entity class
+- Ambiguous biomedical terminology
+- Boundary detection errors
+- Rare entity types and domain-specific abbreviations
 
 ---
 
-## Relevance to AI Reliability and Evaluation
+## 📊 Training Curves
 
-One of the primary lessons from this project is that strong benchmark performance does not always imply reliable behavior.
+PubMedBERT (best run, 70/15/15 split):
 
-While the models achieved good overall performance, detailed analysis revealed situations where predictions could fail due to ambiguity, rare terminology, or contextual variation. Understanding these failure modes is critical for developing trustworthy AI systems.
+| Epoch | Train Loss | Val F1 |
+|---|---|---|
+| 1 | 2.35 | 57.3% |
+| 3 | 0.46 | 70.5% |
+| 6 | 0.16 | 73.6% |
+| 9 | 0.11 | 74.1% |
+| 15 | 0.10 | 74.3% |
 
-This project strengthened my interest in:
-
-* AI evaluation
-* Benchmark design
-* Model robustness
-* Failure analysis
-* Trustworthy machine learning systems
-
----
-
-## My Contributions
-
-I was responsible for:
-
-* Dataset preparation and preprocessing
-* Model implementation and fine-tuning
-* Training pipeline development
-* Performance evaluation
-* Error analysis
-* Interpretation and reporting of results
-
-I independently conducted experiments to compare model behavior, investigate failure cases, and identify opportunities for improving biomedical entity recognition performance.
+> Loss decreased from ~2.35 → below 0.10. Performance plateaued after ~9–11 epochs.
 
 ---
 
-## Future Improvements
+## ⚙️ Technologies
 
-* Explore larger biomedical language models
-* Investigate retrieval-augmented approaches
-* Improve handling of rare entities
-* Develop more robust evaluation benchmarks
-* Study model reliability under distribution shifts
+| Category | Tools |
+|---|---|
+| Language | Python 3.8+ |
+| Deep Learning | PyTorch, Transformers (HuggingFace) |
+| NER Metrics | HuggingFace `evaluate` (seqeval) |
+| Data | NumPy, Pandas, Scikit-learn |
+| Graph DB | Neo4j |
+| Environment | Anaconda (`torch_gpu`), Windows, NVIDIA RTX 2050 |
 
 ---
+
+## 🔄 Project Workflow
+
+```
+  PubMed Abstracts (14 LPMO authors)
+             │
+             ▼
+  Manual Annotation (BIO tagging: ENZYME / SUBSTRATE / RELATION / O)
+             │
+             ▼
+  Tokenization  ──►  Sub-word alignment
+             │
+             ▼
+  Fine-Tuning  ──►  BioBERT  /  PubMedBERT ⭐
+             │
+             ▼
+  Evaluation  ──►  Precision · Recall · F1 · Accuracy
+             │
+             ▼
+  Relation Extraction  ──►  Triple generation (Subject, Relation, Object)
+             │
+             ▼
+  Neo4j Knowledge Graph  ──►  119 nodes · 257 edges · 8,065 triples
+             │
+             ▼
+  Error Analysis & Reporting
+```
+
+---
+
+## ⚠️ Challenges
+
+- **Complex vocabulary** — LPMO-specific terms, abbreviations (LPMO, GH61, AA9)
+- **Class imbalance** — unequal distribution of ENZYME, SUBSTRATE, RELATION tags
+- **Annotation inconsistencies** — across two independently annotated source files
+- **Long sentences** — scientific abstracts with nested entity mentions
+- **Relation ambiguity** — same verb can describe different biological events in context
+
+---
+
+## 🔍 Relevance to AI Reliability
+
+> *Strong benchmark performance does not always imply reliable behavior.*
+
+While models achieved good overall performance, error analysis revealed failure modes caused by ambiguity, rare terminology, and contextual variation. Understanding these is critical for deploying trustworthy AI in scientific and healthcare settings.
+
+Key takeaways:
+
+- Careful **benchmark design** matters as much as model architecture
+- **Entity boundary errors** are common and often invisible in aggregate metrics
+- Domain-specific pretraining (PubMedBERT) outperforms general pretraining (BioBERT) on specialized corpora
+
+---
+
+## 👤 My Contributions
+
+- Dataset preparation, merging, and normalization (`train.json` + `train_vennila.json`)
+- Model implementation and fine-tuning for BioBERT and PubMedBERT
+- Training pipeline with early stopping and validation monitoring
+- Performance evaluation using seqeval (entity-level metrics)
+- Knowledge Graph construction in Neo4j from predicted triples
+- Error analysis and failure mode interpretation
+- Abstract accepted at **ISMB 2026** (International Society for Computational Biology)
+
+---
+
+## 🚀 Future Work
+
+- [ ] Explore larger biomedical LMs — BioGPT, LLaMA-Med
+- [ ] Retrieval-augmented approaches for rare entity handling
+- [ ] Expand entity types: MICROBE, ORGANISM, REACTION
+- [ ] Integrate KG with [KnetMiner](https://knetminer.com) for cross-domain discovery
+- [ ] Interactive Neo4j querying interface
+- [ ] Extend to broader CAZyme / glycoside hydrolase families
+- [ ] Study robustness under distribution shift (full-text articles vs. abstracts)
+
+---
+
+## 📄 Publication
+
+> **Construction of a Domain-Specific Knowledge Graph for LPMO Research Using Machine Learning-Based Named Entity Recognition**
+>
+> Kishore Matheswaran, Vennila Kanchana Devi Marimuthu, Ragothaman M. Yennamalli
+>
+> *Accepted — ISMB 2026, International Society for Computational Biology*
+
+---
+
+<div align="center">
+<sub>SASTRA Deemed to be University, Thanjavur, India · Dept. of Mathematics & Bioinformatics</sub>
+</div>
